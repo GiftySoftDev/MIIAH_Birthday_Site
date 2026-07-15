@@ -15,6 +15,10 @@ import {
 } from "firebase/firestore";
 
 const WishesSection = () => {
+  const [expandedYears, setExpandedYears] = useState<Record<number, boolean>>({
+  2026: true,
+  2025: false,
+});
   const [newWish, setNewWish] = useState("");
   const [wishAuthor, setWishAuthor] = useState("");
   const [wishes, setWishes] = useState<
@@ -26,6 +30,13 @@ const WishesSection = () => {
       createdAt?: string;
     }>
   >([]);
+
+  const wishesByYear = wishes.reduce((acc, wish) => {
+  const year = new Date(wish.timestamp).getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(wish);
+  return acc;
+}, {} as Record<number, typeof wishes>);
 
   // Load wishes from Firestore
   useEffect(() => {
@@ -119,7 +130,7 @@ const WishesSection = () => {
         <CardContent className="p-8">
           <div className="text-center mb-6">
             <Gift className="w-12 h-12 text-gold mx-auto mb-4" />
-            <h3 className="font-playfair text-2xl font-semibold text-navy mb-2">
+            <h3 className="text-2xl font-semibold text-navy mb-2">
               Share Your Birthday Wish
             </h3>
             <p className="font-cormorant text-lg text-charcoal">
@@ -154,12 +165,35 @@ const WishesSection = () => {
 
       {/* Wishes Display */}
       <div className="space-y-6">
-        <h3 className="font-playfair text-3xl font-semibold text-center text-navy mb-8">
+        <h3 className="text-3xl font-semibold text-center text-navy mb-8 md:mt-32 lg:mt-48">
           Birthday Messages
         </h3>
 
-        {wishes.map((wish, index) => (
-          <Card
+     {Object.entries(wishesByYear)
+  .sort(([a], [b]) => Number(b) - Number(a))
+  .map(([year, yearWishes]) => (
+    <div key={year} className="mb-10">
+      <button
+        onClick={() =>
+          setExpandedYears(prev => ({
+            ...prev,
+            [Number(year)]: !prev[Number(year)],
+          }))
+        }
+        className="flex items-center justify-between w-full mb-6"
+      >
+        <h3 className="text-3xl font-semibold text-navy">
+          🎂 {year} Birthday Wishes ({yearWishes.length})
+        </h3>
+
+        <span>
+          {expandedYears[Number(year)] ? "▲" : "▼"}
+        </span>
+      </button>
+
+      {expandedYears[Number(year)] &&
+        yearWishes.map((wish, index) => (
+         <Card
             key={wish.id}
             className={`transform transition-all duration-500 hover:scale-105 shadow-xl border-gold/20 animate-slide-in-left`}
             style={{ animationDelay: `${index * 0.1}s` }}
@@ -191,6 +225,8 @@ const WishesSection = () => {
             </CardContent>
           </Card>
         ))}
+    </div>
+))}
       </div>
 
       {/* Birthday Quote */}
@@ -198,7 +234,7 @@ const WishesSection = () => {
         <Card className="bg-gradient-gold border-gold/30 shadow-2xl">
           <CardContent className="p-8">
             <Star className="w-8 h-8 text-navy mx-auto mb-4" />
-            <blockquote className="font-playfair text-2xl md:text-3xl font-semibold text-navy mb-4 italic">
+            <blockquote className="text-2xl md:text-3xl font-semibold text-navy mb-4 italic">
               The more you celebrate your life, the more there is in life to
               celebrate.
             </blockquote>

@@ -59,8 +59,11 @@ const Footer = () => {
         <div className="border-t border-gold/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="font-inter text-cream/70 text-center md:text-left">
-              © {currentYear} • Crafted with ❤️ for a Special Birthday by
-              Gifty—MIIAH's bossom friend.
+              © {currentYear} • Crafted with ❤️ for a Special Birthday by{" "}
+                  <a href="https://websitetoscale.com" target="_blank"   rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 underline">
+        Gifty
+        </a>—MIIAH's bossom friend.
+              
             </p>
             <div className="flex items-center space-x-2">
               <Sparkles className="w-4 h-4 text-gold" />

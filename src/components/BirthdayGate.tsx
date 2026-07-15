@@ -228,7 +228,7 @@ export const BirthdayGate = ({ children }: BirthdayGateProps) => {
   if (effectiveIsPostBirthday) {
     return (
       <div className="min-h-screen py-10 sm:py-20  bg-gradient-to-br from-cream via-white to-champagne flex items-center justify-center px-4">
-        <Card className="max-w-4xl mx-auto shadow-2xl border-gold/20">
+        <Card className="max-w-4xl mx-auto shadow-md border-gold/20">
           <CardContent className="py-12 px-2 sm:p-12  text-center">
             <div className="mb-8">
               <Calendar className="w-16 h-16 text-gold mx-auto mb-6 animate-float" />
@@ -241,7 +241,7 @@ export const BirthdayGate = ({ children }: BirthdayGateProps) => {
               </p>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-8 border border-gold/20">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-sm mb-8 border border-gold/20">
               <div className="flex items-center justify-center mb-8">
                 <Gift className="w-8 h-8 text-gold mr-3" />
                 <h3 className="font-playfair text-3xl font-semibold text-navy">
@@ -303,7 +303,7 @@ export const BirthdayGate = ({ children }: BirthdayGateProps) => {
 
   return (
     <div className="min-h-screen py-10 sm:py-20 bg-gradient-to-br from-cream via-white to-champagne flex items-center justify-center px-4">
-      <Card className="max-w-4xl mx-auto shadow-2xl  border-gold/20">
+      <Card className="max-w-4xl mx-auto shadow-md  border-gold/20">
         <CardContent className="py-12 px-2 sm:p-12 text-center">
           <div className="mb-8">
             <Clock className="w-16 h-16 text-gold mx-auto mb-6 animate-float" />
@@ -315,7 +315,7 @@ export const BirthdayGate = ({ children }: BirthdayGateProps) => {
             </p>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-8 border border-gold/20">
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-sm mb-8 border border-gold/20">
             <div className="flex items-center justify-center mb-8">
               <Gift className="w-8 h-8 text-gold mr-3" />
               <h3 className="font-playfair text-3xl font-semibold text-navy">
